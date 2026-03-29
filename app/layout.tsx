@@ -17,23 +17,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'SEN Jus - Jus de Mil Naturel du Senegal',
   description: 'Decouvrez SEN Jus, le jus de mil 100% naturel du Senegal. Boisson traditionnelle senegalaise, delicieuse et nutritive.',
-  generator: 'v0.app',
   icons: {
     icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
+      { url: '/icon.svg', type: 'image/svg+xml' },
     ],
-    apple: '/apple-icon.png',
   },
 }
 
