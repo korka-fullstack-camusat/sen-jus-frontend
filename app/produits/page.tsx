@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { Search, SlidersHorizontal } from "lucide-react"
+import { Search } from "lucide-react"
 import { Header } from "@/components/store/header"
 import { Footer } from "@/components/store/footer"
 import { ProductCard } from "@/components/store/product-card"
@@ -26,6 +26,7 @@ export default function ProductsPage() {
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       <main className="flex-1">
+
         {/* Hero Banner */}
         <div className="bg-gradient-to-r from-primary/10 via-secondary to-accent/10 py-10 sm:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
@@ -33,54 +34,77 @@ export default function ProductsPage() {
               Nos Produits
             </h1>
             <p className="text-muted-foreground mt-3 max-w-xl mx-auto text-sm sm:text-base">
-              Decouvrez notre gamme complete de produits naturels a base de mil
+              Decouvrez notre gamme complete de jus de mil 100% naturels
             </p>
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
-          {/* Filters */}
-          <div className="flex flex-col gap-4 mb-8">
-            {/* Search */}
-            <div className="relative max-w-md">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Rechercher un produit..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="pl-11 h-12 rounded-full border-border bg-card"
-              />
+        {/* Filters Section */}
+        <div className="border-b border-border bg-card shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5 sm:py-6">
+
+            {/* Search — centre sur desktop */}
+            <div className="flex justify-center mb-5">
+              <div className="relative w-full max-w-xl">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Rechercher un produit..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="pl-11 h-12 rounded-full border-border bg-background shadow-sm"
+                />
+              </div>
             </div>
 
-            {/* Category Pills */}
-            <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
-              <Button
-                variant={selectedCategory === null ? "default" : "outline"}
-                size="sm"
-                onClick={() => setSelectedCategory(null)}
-                className="rounded-full flex-shrink-0 h-9"
-              >
-                Tous
-              </Button>
-              {mockCategories.map(category => (
+            {/* Category Pills — centrees */}
+            <div className="flex justify-center">
+              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
                 <Button
-                  key={category.id}
-                  variant={selectedCategory === category.name ? "default" : "outline"}
+                  variant={selectedCategory === null ? "default" : "outline"}
                   size="sm"
-                  onClick={() => setSelectedCategory(category.name)}
-                  className="rounded-full flex-shrink-0 h-9"
+                  onClick={() => setSelectedCategory(null)}
+                  className="rounded-full flex-shrink-0 h-9 px-5 font-medium"
                 >
-                  {category.name}
+                  Tous
                 </Button>
-              ))}
+                {mockCategories.map(category => (
+                  <Button
+                    key={category.id}
+                    variant={selectedCategory === category.name ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setSelectedCategory(category.name)}
+                    className="rounded-full flex-shrink-0 h-9 px-5 font-medium"
+                  >
+                    {category.name}
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
+
+        {/* Products Section */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
 
           {/* Results Count */}
-          <p className="text-sm text-muted-foreground mb-6">
-            {filteredProducts.length} produit{filteredProducts.length > 1 ? "s" : ""} trouve{filteredProducts.length > 1 ? "s" : ""}
-          </p>
+          <div className="flex items-center justify-between mb-6">
+            <p className="text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">{filteredProducts.length}</span>{" "}
+              produit{filteredProducts.length > 1 ? "s" : ""} trouve{filteredProducts.length > 1 ? "s" : ""}
+              {selectedCategory && (
+                <span className="ml-1">dans <span className="text-primary font-medium">{selectedCategory}</span></span>
+              )}
+            </p>
+            {(search || selectedCategory) && (
+              <button
+                onClick={() => { setSearch(""); setSelectedCategory(null) }}
+                className="text-xs text-muted-foreground hover:text-primary underline underline-offset-2 transition-colors"
+              >
+                Reinitialiser
+              </button>
+            )}
+          </div>
 
           {/* Products Grid */}
           {filteredProducts.length > 0 ? (
@@ -101,16 +125,14 @@ export default function ProductsPage() {
               <Button
                 variant="outline"
                 className="mt-4 rounded-full"
-                onClick={() => {
-                  setSearch("")
-                  setSelectedCategory(null)
-                }}
+                onClick={() => { setSearch(""); setSelectedCategory(null) }}
               >
                 Reinitialiser les filtres
               </Button>
             </div>
           )}
         </div>
+
       </main>
       <Footer />
     </div>

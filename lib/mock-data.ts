@@ -10,17 +10,25 @@ export const mockProducts: Product[] = [
     price: 1500,
     category: 'Jus 1L',
     stock: 48,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1546173159-315724a31696?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-10T08:00:00Z',
   },
   {
     id: 2,
     name: 'Jus de Mil Gingembre 1L',
-    description: "Alliance parfaite du mil et du gingembre frais du Senegale. Tonique, revigorant et excellent pour la digestion.",
+    description: "Alliance parfaite du mil et du gingembre frais du Senegal. Tonique, revigorant et excellent pour la digestion.",
     price: 1700,
     category: 'Jus 1L',
     stock: 35,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1573590330099-d6c7355ec595?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1565958374765-6e9d8a55e7e1?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-10T08:00:00Z',
   },
   {
@@ -30,7 +38,11 @@ export const mockProducts: Product[] = [
     price: 1800,
     category: 'Jus 1L',
     stock: 22,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1576036083984-8f2e77e4f0df?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1559181567-c3190bba7bfb?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-12T09:00:00Z',
   },
   {
@@ -40,7 +52,11 @@ export const mockProducts: Product[] = [
     price: 1600,
     category: 'Jus 1L',
     stock: 5,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1541658016709-82535e94bc69?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-15T10:00:00Z',
   },
 
@@ -52,7 +68,10 @@ export const mockProducts: Product[] = [
     price: 800,
     category: 'Jus 50cl',
     stock: 60,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-10T08:00:00Z',
   },
   {
@@ -62,7 +81,10 @@ export const mockProducts: Product[] = [
     price: 900,
     category: 'Jus 50cl',
     stock: 45,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1573590330099-d6c7355ec595?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-10T08:00:00Z',
   },
   {
@@ -72,7 +94,10 @@ export const mockProducts: Product[] = [
     price: 850,
     category: 'Jus 50cl',
     stock: 0,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1570831739435-6601aa3fa4fb?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-18T11:00:00Z',
   },
 
@@ -84,7 +109,10 @@ export const mockProducts: Product[] = [
     price: 450,
     category: 'Jus 25cl',
     stock: 100,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1546173159-315724a31696?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-10T08:00:00Z',
   },
   {
@@ -94,7 +122,10 @@ export const mockProducts: Product[] = [
     price: 500,
     category: 'Jus 25cl',
     stock: 80,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1565958374765-6e9d8a55e7e1?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-10T08:00:00Z',
   },
   {
@@ -104,7 +135,10 @@ export const mockProducts: Product[] = [
     price: 550,
     category: 'Jus 25cl',
     stock: 3,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1490323814420-c9a5bd1cadb7?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1559181567-c3190bba7bfb?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-20T09:30:00Z',
   },
 
@@ -116,7 +150,11 @@ export const mockProducts: Product[] = [
     price: 2500,
     category: 'Packs',
     stock: 20,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-22T10:00:00Z',
   },
   {
@@ -126,7 +164,11 @@ export const mockProducts: Product[] = [
     price: 5500,
     category: 'Packs',
     stock: 15,
-    images: ['/placeholder.jpg'],
+    images: [
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=600&h=600&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=600&h=600&fit=crop&q=80',
+    ],
     created_at: '2025-01-22T10:00:00Z',
   },
 ]
