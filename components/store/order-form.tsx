@@ -8,12 +8,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useCart } from '@/context/cart-context'
+import type { PaymentMethod } from '@/lib/types'
 
 export function OrderForm() {
   const router = useRouter()
   const { items, total, clearCart } = useCart()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null)
   const [formData, setFormData] = useState({
     client_name: '',
     client_email: '',
@@ -27,6 +29,7 @@ export function OrderForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!paymentMethod) return
     setIsSubmitting(true)
 
     // Simulate API call
@@ -35,6 +38,7 @@ export function OrderForm() {
     // In production, this would call the backend API
     // const order = await ordersAPI.create({
     //   ...formData,
+    //   payment_method: paymentMethod,
     //   items: items.map(item => ({
     //     product_id: item.product.id,
     //     quantity: item.quantity,
@@ -61,9 +65,14 @@ export function OrderForm() {
           <h2 className="font-serif text-2xl font-bold text-foreground mb-2">
             Commande confirmée!
           </h2>
-          <p className="text-muted-foreground mb-4">
+          <p className="text-muted-foreground mb-2">
             Merci pour votre commande. Vous recevrez une confirmation par email.
           </p>
+          {paymentMethod && (
+            <p className="text-sm font-medium text-primary mb-4">
+              Paiement via {paymentMethod === 'wave' ? 'Wave' : 'Orange Money'} en cours de traitement.
+            </p>
+          )}
           <p className="text-sm text-muted-foreground">
             Redirection vers l&apos;accueil...
           </p>
@@ -130,6 +139,77 @@ export function OrderForm() {
             />
           </div>
 
+          {/* Mode de paiement */}
+          <div>
+            <label className="text-sm font-medium text-foreground mb-3 block">
+              Mode de paiement *
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              {/* Wave */}
+              <button
+                type="button"
+                onClick={() => setPaymentMethod('wave')}
+                className={`relative flex flex-col items-center justify-center gap-2 rounded-lg border-2 p-4 transition-all cursor-pointer ${
+                  paymentMethod === 'wave'
+                    ? 'border-blue-600 bg-blue-50'
+                    : 'border-border bg-card hover:border-blue-300 hover:bg-blue-50/40'
+                }`}
+              >
+                {paymentMethod === 'wave' && (
+                  <span className="absolute top-2 right-2 h-4 w-4 rounded-full bg-blue-600 flex items-center justify-center">
+                    <svg className="h-2.5 w-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                )}
+                {/* Wave logo text */}
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600">
+                  <span className="text-white font-bold text-lg leading-none">W</span>
+                </div>
+                <span className={`text-sm font-semibold ${paymentMethod === 'wave' ? 'text-blue-700' : 'text-foreground'}`}>
+                  Wave
+                </span>
+                <span className="text-[10px] text-muted-foreground text-center leading-tight">
+                  Paiement mobile instantané
+                </span>
+              </button>
+
+              {/* Orange Money */}
+              <button
+                type="button"
+                onClick={() => setPaymentMethod('orange_money')}
+                className={`relative flex flex-col items-center justify-center gap-2 rounded-lg border-2 p-4 transition-all cursor-pointer ${
+                  paymentMethod === 'orange_money'
+                    ? 'border-orange-500 bg-orange-50'
+                    : 'border-border bg-card hover:border-orange-300 hover:bg-orange-50/40'
+                }`}
+              >
+                {paymentMethod === 'orange_money' && (
+                  <span className="absolute top-2 right-2 h-4 w-4 rounded-full bg-orange-500 flex items-center justify-center">
+                    <svg className="h-2.5 w-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                )}
+                {/* Orange Money logo */}
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-500">
+                  <span className="text-white font-bold text-lg leading-none">OM</span>
+                </div>
+                <span className={`text-sm font-semibold ${paymentMethod === 'orange_money' ? 'text-orange-600' : 'text-foreground'}`}>
+                  Orange Money
+                </span>
+                <span className="text-[10px] text-muted-foreground text-center leading-tight">
+                  Paiement mobile sécurisé
+                </span>
+              </button>
+            </div>
+            {!paymentMethod && (
+              <p className="text-xs text-muted-foreground mt-2">
+                Veuillez choisir un mode de paiement pour continuer.
+              </p>
+            )}
+          </div>
+
           {/* Order Summary */}
           <div className="bg-muted rounded-lg p-4 mt-6">
             <h3 className="font-semibold mb-3">Récapitulatif</h3>
@@ -147,6 +227,14 @@ export function OrderForm() {
                 <span>Total</span>
                 <span className="text-primary">{formatPrice(total)}</span>
               </div>
+              {paymentMethod && (
+                <div className="flex justify-between text-xs text-muted-foreground pt-1">
+                  <span>Mode de paiement</span>
+                  <span className={`font-medium ${paymentMethod === 'wave' ? 'text-blue-600' : 'text-orange-500'}`}>
+                    {paymentMethod === 'wave' ? 'Wave' : 'Orange Money'}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -154,7 +242,7 @@ export function OrderForm() {
             type="submit"
             className="w-full"
             size="lg"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !paymentMethod}
           >
             {isSubmitting ? 'Traitement...' : 'Confirmer la commande'}
           </Button>

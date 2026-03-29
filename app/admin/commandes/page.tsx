@@ -94,6 +94,14 @@ export default function AdminOrdersPage() {
                     <p>Email: <span className="text-foreground">{order.client_email}</span></p>
                     <p>Téléphone: <span className="text-foreground">{order.client_phone}</span></p>
                     <p>Date: <span className="text-foreground">{order.created_at}</span></p>
+                    {order.payment_method && (
+                      <p>
+                        Paiement:{' '}
+                        <span className={`font-medium ${order.payment_method === 'wave' ? 'text-blue-600' : 'text-orange-500'}`}>
+                          {order.payment_method === 'wave' ? 'Wave' : 'Orange Money'}
+                        </span>
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -209,6 +217,21 @@ export default function AdminOrdersPage() {
                   </div>
                 </div>
               </div>
+
+              {/* Payment Method */}
+              {selectedOrder.payment_method && (
+                <div className="flex items-center gap-3">
+                  <span className="text-sm text-muted-foreground">Mode de paiement:</span>
+                  <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold ${
+                    selectedOrder.payment_method === 'wave'
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'bg-orange-100 text-orange-600'
+                  }`}>
+                    <span className={`h-2 w-2 rounded-full ${selectedOrder.payment_method === 'wave' ? 'bg-blue-600' : 'bg-orange-500'}`} />
+                    {selectedOrder.payment_method === 'wave' ? 'Wave' : 'Orange Money'}
+                  </span>
+                </div>
+              )}
 
               {/* Actions */}
               {(selectedOrder.status === 'en_attente' || selectedOrder.status === 'en_cours') && (

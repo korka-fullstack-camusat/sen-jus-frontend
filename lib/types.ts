@@ -21,6 +21,9 @@ export interface ProductCreate {
   images: string[]
 }
 
+// Payment types
+export type PaymentMethod = 'wave' | 'orange_money'
+
 // Order types
 export interface OrderItem {
   product_id: number
@@ -39,6 +42,7 @@ export interface Order {
   status: 'en_attente' | 'en_cours' | 'validee' | 'rejetee' | 'livree'
   created_at: string
   address?: string
+  payment_method?: PaymentMethod
 }
 
 export interface OrderCreate {
@@ -48,6 +52,7 @@ export interface OrderCreate {
   items: OrderItem[]
   total: number
   address?: string
+  payment_method: PaymentMethod
 }
 
 // Category types
