@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { CheckCircle } from 'lucide-react'
+import { CheckCircle, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -32,62 +32,154 @@ export function OrderForm() {
     if (!paymentMethod) return
     setIsSubmitting(true)
 
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500))
 
-    // In production, this would call the backend API
-    // const order = await ordersAPI.create({
-    //   ...formData,
-    //   payment_method: paymentMethod,
-    //   items: items.map(item => ({
-    //     product_id: item.product.id,
-    //     quantity: item.quantity,
-    //     price: item.product.price,
-    //   })),
-    //   total,
-    // })
+    // In production:
+    // await ordersAPI.create({ ...formData, payment_method: paymentMethod, items: ..., total })
 
     setIsSubmitting(false)
     setIsSuccess(true)
     clearCart()
 
-    // Redirect after 3 seconds
-    setTimeout(() => {
-      router.push('/')
-    }, 3000)
+    setTimeout(() => router.push('/'), 3000)
   }
 
+  // --- Ecran de succes ---
   if (isSuccess) {
     return (
-      <Card className="text-center py-8">
+      <Card className="text-center py-10">
         <CardContent>
-          <CheckCircle className="h-16 w-16 mx-auto text-success mb-4" />
+          <CheckCircle className="h-16 w-16 mx-auto mb-4 text-green-500" />
           <h2 className="font-serif text-2xl font-bold text-foreground mb-2">
-            Commande confirmée!
+            Commande confirmee !
           </h2>
           <p className="text-muted-foreground mb-2">
             Merci pour votre commande. Vous recevrez une confirmation par email.
           </p>
-          {paymentMethod && (
-            <p className="text-sm font-medium text-primary mb-4">
-              Paiement via {paymentMethod === 'wave' ? 'Wave' : 'Orange Money'} en cours de traitement.
-            </p>
-          )}
-          <p className="text-sm text-muted-foreground">
-            Redirection vers l&apos;accueil...
+          <p className="text-sm font-medium mb-4">
+            Paiement via{' '}
+            <span className={paymentMethod === 'wave' ? 'text-blue-600' : 'text-orange-500'}>
+              {paymentMethod === 'wave' ? 'Wave' : 'Orange Money'}
+            </span>{' '}
+            en cours de traitement.
           </p>
+          <p className="text-xs text-muted-foreground">Redirection vers l&apos;accueil...</p>
         </CardContent>
       </Card>
     )
   }
 
+  // --- ETAPE 1 : Choix du mode de paiement ---
+  if (!paymentMethod) {
+    return (
+      <Card>
+        <CardHeader className="pb-2">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold">1</span>
+            <CardTitle className="font-serif text-lg">Choisir le mode de paiement</CardTitle>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Selectionnez votre mode de paiement pour continuer
+          </p>
+        </CardHeader>
+        <CardContent className="pt-4">
+          <div className="grid grid-cols-2 gap-4">
+
+            {/* Wave */}
+            <button
+              type="button"
+              onClick={() => setPaymentMethod('wave')}
+              className="group relative flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-border bg-card p-6 transition-all hover:border-blue-500 hover:bg-blue-50 hover:shadow-md active:scale-95 cursor-pointer"
+            >
+              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 shadow-md group-hover:scale-105 transition-transform">
+                <span className="text-white font-bold text-2xl leading-none">W</span>
+              </div>
+              <div className="text-center">
+                <p className="text-base font-bold text-foreground group-hover:text-blue-700">Wave</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Paiement instantane</p>
+              </div>
+              <span className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                <ChevronRight className="h-4 w-4 text-blue-500" />
+              </span>
+            </button>
+
+            {/* Orange Money */}
+            <button
+              type="button"
+              onClick={() => setPaymentMethod('orange_money')}
+              className="group relative flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-border bg-card p-6 transition-all hover:border-orange-500 hover:bg-orange-50 hover:shadow-md active:scale-95 cursor-pointer"
+            >
+              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-orange-500 shadow-md group-hover:scale-105 transition-transform">
+                <span className="text-white font-bold text-xl leading-none">OM</span>
+              </div>
+              <div className="text-center">
+                <p className="text-base font-bold text-foreground group-hover:text-orange-600">Orange Money</p>
+                <p className="text-xs text-muted-foreground mt-0.5">Paiement securise</p>
+              </div>
+              <span className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                <ChevronRight className="h-4 w-4 text-orange-500" />
+              </span>
+            </button>
+          </div>
+
+          {/* Recapitulatif panier */}
+          <div className="mt-6 bg-muted rounded-lg p-4">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+              Recapitulatif de votre commande
+            </p>
+            <div className="space-y-1.5 text-sm">
+              {items.map(item => (
+                <div key={item.product.id} className="flex justify-between">
+                  <span className="text-muted-foreground truncate mr-2">
+                    {item.product.name} x{item.quantity}
+                  </span>
+                  <span className="font-medium flex-shrink-0">{formatPrice(item.product.price * item.quantity)}</span>
+                </div>
+              ))}
+              <hr className="my-2 border-border" />
+              <div className="flex justify-between font-bold text-base">
+                <span>Total</span>
+                <span className="text-primary">{formatPrice(total)}</span>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  // --- ETAPE 2 : Formulaire de livraison ---
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="font-serif">Finaliser la commande</CardTitle>
+      <CardHeader className="pb-2">
+        {/* Indicateur de paiement selectionne */}
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-muted text-muted-foreground text-xs font-bold">1</span>
+            <span className="text-sm text-muted-foreground line-through">Mode de paiement</span>
+          </div>
+          <button
+            onClick={() => setPaymentMethod(null)}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
+              paymentMethod === 'wave'
+                ? 'bg-blue-50 border-blue-300 text-blue-700 hover:bg-blue-100'
+                : 'bg-orange-50 border-orange-300 text-orange-600 hover:bg-orange-100'
+            }`}
+          >
+            <span className={`w-2 h-2 rounded-full ${paymentMethod === 'wave' ? 'bg-blue-600' : 'bg-orange-500'}`} />
+            {paymentMethod === 'wave' ? 'Wave' : 'Orange Money'}
+            <span className="underline underline-offset-1">Changer</span>
+          </button>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold">2</span>
+          <CardTitle className="font-serif text-lg">Vos informations de livraison</CardTitle>
+        </div>
       </CardHeader>
+
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 mt-2">
           <div>
             <label className="text-sm font-medium text-foreground mb-1.5 block">
               Nom complet *
@@ -96,7 +188,7 @@ export function OrderForm() {
               required
               value={formData.client_name}
               onChange={(e) => setFormData({ ...formData, client_name: e.target.value })}
-              placeholder="Votre nom"
+              placeholder="Votre nom complet"
             />
           </div>
 
@@ -115,7 +207,7 @@ export function OrderForm() {
 
           <div>
             <label className="text-sm font-medium text-foreground mb-1.5 block">
-              Téléphone *
+              Telephone *
             </label>
             <Input
               type="tel"
@@ -134,117 +226,46 @@ export function OrderForm() {
               required
               value={formData.address}
               onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              placeholder="Votre adresse complète"
+              placeholder="Votre adresse complete (quartier, rue, ville...)"
               rows={3}
             />
           </div>
 
-          {/* Mode de paiement */}
-          <div>
-            <label className="text-sm font-medium text-foreground mb-3 block">
-              Mode de paiement *
-            </label>
-            <div className="grid grid-cols-2 gap-3">
-              {/* Wave */}
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('wave')}
-                className={`relative flex flex-col items-center justify-center gap-2 rounded-lg border-2 p-4 transition-all cursor-pointer ${
-                  paymentMethod === 'wave'
-                    ? 'border-blue-600 bg-blue-50'
-                    : 'border-border bg-card hover:border-blue-300 hover:bg-blue-50/40'
-                }`}
-              >
-                {paymentMethod === 'wave' && (
-                  <span className="absolute top-2 right-2 h-4 w-4 rounded-full bg-blue-600 flex items-center justify-center">
-                    <svg className="h-2.5 w-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </span>
-                )}
-                {/* Wave logo text */}
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600">
-                  <span className="text-white font-bold text-lg leading-none">W</span>
-                </div>
-                <span className={`text-sm font-semibold ${paymentMethod === 'wave' ? 'text-blue-700' : 'text-foreground'}`}>
-                  Wave
-                </span>
-                <span className="text-[10px] text-muted-foreground text-center leading-tight">
-                  Paiement mobile instantané
-                </span>
-              </button>
-
-              {/* Orange Money */}
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('orange_money')}
-                className={`relative flex flex-col items-center justify-center gap-2 rounded-lg border-2 p-4 transition-all cursor-pointer ${
-                  paymentMethod === 'orange_money'
-                    ? 'border-orange-500 bg-orange-50'
-                    : 'border-border bg-card hover:border-orange-300 hover:bg-orange-50/40'
-                }`}
-              >
-                {paymentMethod === 'orange_money' && (
-                  <span className="absolute top-2 right-2 h-4 w-4 rounded-full bg-orange-500 flex items-center justify-center">
-                    <svg className="h-2.5 w-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </span>
-                )}
-                {/* Orange Money logo */}
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-orange-500">
-                  <span className="text-white font-bold text-lg leading-none">OM</span>
-                </div>
-                <span className={`text-sm font-semibold ${paymentMethod === 'orange_money' ? 'text-orange-600' : 'text-foreground'}`}>
-                  Orange Money
-                </span>
-                <span className="text-[10px] text-muted-foreground text-center leading-tight">
-                  Paiement mobile sécurisé
-                </span>
-              </button>
-            </div>
-            {!paymentMethod && (
-              <p className="text-xs text-muted-foreground mt-2">
-                Veuillez choisir un mode de paiement pour continuer.
-              </p>
-            )}
-          </div>
-
-          {/* Order Summary */}
-          <div className="bg-muted rounded-lg p-4 mt-6">
-            <h3 className="font-semibold mb-3">Récapitulatif</h3>
-            <div className="space-y-2 text-sm">
+          {/* Recapitulatif final */}
+          <div className="bg-muted rounded-lg p-4 mt-2">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+              Recapitulatif
+            </p>
+            <div className="space-y-1.5 text-sm">
               {items.map(item => (
                 <div key={item.product.id} className="flex justify-between">
-                  <span className="text-muted-foreground">
+                  <span className="text-muted-foreground truncate mr-2">
                     {item.product.name} x{item.quantity}
                   </span>
                   <span>{formatPrice(item.product.price * item.quantity)}</span>
                 </div>
               ))}
-              <hr className="my-2" />
+              <hr className="my-2 border-border" />
               <div className="flex justify-between font-bold">
                 <span>Total</span>
                 <span className="text-primary">{formatPrice(total)}</span>
               </div>
-              {paymentMethod && (
-                <div className="flex justify-between text-xs text-muted-foreground pt-1">
-                  <span>Mode de paiement</span>
-                  <span className={`font-medium ${paymentMethod === 'wave' ? 'text-blue-600' : 'text-orange-500'}`}>
-                    {paymentMethod === 'wave' ? 'Wave' : 'Orange Money'}
-                  </span>
-                </div>
-              )}
+              <div className="flex justify-between text-xs text-muted-foreground pt-1">
+                <span>Paiement</span>
+                <span className={`font-semibold ${paymentMethod === 'wave' ? 'text-blue-600' : 'text-orange-500'}`}>
+                  {paymentMethod === 'wave' ? 'Wave' : 'Orange Money'}
+                </span>
+              </div>
             </div>
           </div>
 
           <Button
             type="submit"
-            className="w-full"
+            className="w-full h-12"
             size="lg"
-            disabled={isSubmitting || !paymentMethod}
+            disabled={isSubmitting}
           >
-            {isSubmitting ? 'Traitement...' : 'Confirmer la commande'}
+            {isSubmitting ? 'Traitement en cours...' : 'Confirmer la commande'}
           </Button>
         </form>
       </CardContent>
