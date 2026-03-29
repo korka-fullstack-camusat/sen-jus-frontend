@@ -6,20 +6,17 @@ import { Button } from "@/components/ui/button"
 export function Hero() {
   return (
     <section
+      className="mt-14 sm:mt-16 md:mt-20 h-[calc(100svh-3.5rem)] sm:h-[calc(100svh-4rem)] md:h-[calc(100svh-5rem)]"
       style={{
         position: "relative",
-        height: "100svh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        // background-image CSS : impossible de déborder du conteneur
         backgroundImage: "url('/images/hero-bg.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        // Empêche tout enfant absolu de sortir
         overflow: "hidden",
-        // Isole ce contexte de stacking
         isolation: "isolate",
       }}
     >

@@ -1,49 +1,25 @@
 "use client"
 
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { ShoppingBag, Menu, X, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/context/cart-context"
-import { cn } from "@/lib/utils"
 
 export function Header() {
   const { itemCount } = useCart()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   return (
-    <header 
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled 
-          ? "bg-white shadow-sm" 
-          : "bg-transparent"
-      )}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
+
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span 
-              className={cn(
-                "font-serif text-lg sm:text-xl md:text-2xl font-bold tracking-tight transition-colors duration-300",
-                scrolled ? "text-foreground" : "text-white"
-              )}
-            >
+            <span className="font-serif text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-foreground">
               <span>SEN</span>
-              <span className={cn(
-                "italic transition-colors duration-300",
-                scrolled ? "text-primary" : "text-primary"
-              )}> Jus</span>
+              <span className="italic text-primary"> Jus</span>
             </span>
           </Link>
 
@@ -57,12 +33,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={cn(
-                  "text-xs lg:text-sm font-medium uppercase tracking-wider transition-colors",
-                  scrolled 
-                    ? "text-muted-foreground hover:text-primary" 
-                    : "text-white/90 hover:text-white"
-                )}
+                className="text-xs lg:text-sm font-medium uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors"
               >
                 {link.label}
               </Link>
@@ -72,15 +43,10 @@ export function Header() {
           {/* Actions */}
           <div className="flex items-center gap-2 sm:gap-3">
             <Link href="/admin/login" className="hidden sm:block">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className={cn(
-                  "uppercase tracking-wider text-xs font-medium transition-colors h-9",
-                  scrolled 
-                    ? "text-foreground hover:bg-muted hover:text-primary" 
-                    : "text-white hover:bg-white/10"
-                )}
+              <Button
+                variant="ghost"
+                size="sm"
+                className="uppercase tracking-wider text-xs font-medium text-foreground hover:bg-muted hover:text-primary h-9"
               >
                 <User className="h-4 w-4 mr-1.5" />
                 <span className="hidden lg:inline">Se Connecter</span>
@@ -88,13 +54,10 @@ export function Header() {
             </Link>
 
             <Link href="/panier">
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                className={cn(
-                  "relative transition-colors h-9 w-9 sm:h-10 sm:w-10",
-                  scrolled ? "text-foreground hover:bg-muted hover:text-primary" : "text-white hover:bg-white/10"
-                )}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="relative text-foreground hover:bg-muted hover:text-primary h-9 w-9 sm:h-10 sm:w-10"
               >
                 <ShoppingBag className="h-5 w-5" />
                 {itemCount > 0 && (
@@ -109,10 +72,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className={cn(
-                "md:hidden transition-colors h-9 w-9",
-                scrolled ? "text-foreground hover:bg-muted" : "text-white hover:bg-white/10"
-              )}
+              className="md:hidden text-foreground hover:bg-muted h-9 w-9"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
