@@ -6,7 +6,7 @@ export const mockProducts: Product[] = [
   {
     id: 1,
     name: 'Jus de Mil Nature 1L',
-    description: 'Notre jus de mil 100% naturel, sans conservateur ni colorant. Saveur douce et authentique, riche en nutriments essentiels.',
+    description: "Jus de mil 100% naturel, sans conservateur ni colorant. Saveur douce et authentique, riche en fer, calcium et vitamines B.",
     price: 1500,
     category: 'Jus 1L',
     stock: 48,
@@ -16,7 +16,7 @@ export const mockProducts: Product[] = [
   {
     id: 2,
     name: 'Jus de Mil Gingembre 1L',
-    description: 'Alliance parfaite du mil et du gingembre frais. Tonique et revigorant, idéal pour bien démarrer la journée.',
+    description: "Alliance parfaite du mil et du gingembre frais du Senegale. Tonique, revigorant et excellent pour la digestion.",
     price: 1700,
     category: 'Jus 1L',
     stock: 35,
@@ -26,7 +26,7 @@ export const mockProducts: Product[] = [
   {
     id: 3,
     name: 'Jus de Mil Bissap 1L',
-    description: 'Fusion unique du mil et de l'hibiscus (bissap). Un jus coloré aux notes florales et légèrement acidulées.',
+    description: "Fusion unique du mil et de l'hibiscus (bissap). Un jus colore aux notes florales et legerement acidulees, riche en antioxydants.",
     price: 1800,
     category: 'Jus 1L',
     stock: 22,
@@ -36,7 +36,7 @@ export const mockProducts: Product[] = [
   {
     id: 4,
     name: 'Jus de Mil Vanille 1L',
-    description: 'Douceur du mil sublimée par la vanille naturelle de Madagascar. Un régal pour toute la famille.',
+    description: "Douceur du mil sublimee par la vanille naturelle. Un gout onctueux et equilibre que toute la famille adore.",
     price: 1600,
     category: 'Jus 1L',
     stock: 5,
@@ -48,7 +48,7 @@ export const mockProducts: Product[] = [
   {
     id: 5,
     name: 'Jus de Mil Nature 50cl',
-    description: 'Format pratique pour emporter partout. Le même jus de mil naturel authentique dans un format nomade.',
+    description: "Format pratique pour emporter partout. Le meme jus de mil naturel authentique dans un format nomade ideal pour le bureau ou les sorties.",
     price: 800,
     category: 'Jus 50cl',
     stock: 60,
@@ -58,7 +58,7 @@ export const mockProducts: Product[] = [
   {
     id: 6,
     name: 'Jus de Mil Gingembre 50cl',
-    description: 'Tonique au gingembre en format demi-litre. Parfait pour l'école, le bureau ou le sport.',
+    description: "Tonique au gingembre en format demi-litre. Parfait pour l'ecole, le bureau ou le sport. Se consomme bien frais.",
     price: 900,
     category: 'Jus 50cl',
     stock: 45,
@@ -68,7 +68,7 @@ export const mockProducts: Product[] = [
   {
     id: 7,
     name: 'Jus de Mil Menthe 50cl',
-    description: 'Fraîcheur de la menthe mêlée à la richesse du mil. Désaltérant et rafraîchissant, idéal par forte chaleur.',
+    description: "Fraicheur de la menthe melee a la richesse du mil. Desalterant et rafraichissant, ideal par forte chaleur senegalaise.",
     price: 850,
     category: 'Jus 50cl',
     stock: 0,
@@ -80,7 +80,7 @@ export const mockProducts: Product[] = [
   {
     id: 8,
     name: 'Jus de Mil Nature 25cl',
-    description: 'Mini format pour les petites soifs. Le pur jus de mil dans la poche, sans sucre ajouté.',
+    description: "Mini format pour les petites soifs. Le pur jus de mil dans la poche, sans sucre ajoute. Ideal pour les enfants.",
     price: 450,
     category: 'Jus 25cl',
     stock: 100,
@@ -90,7 +90,7 @@ export const mockProducts: Product[] = [
   {
     id: 9,
     name: 'Jus de Mil Gingembre 25cl',
-    description: 'Mini brique tonique au gingembre. Idéale pour les enfants et les collations en déplacement.',
+    description: "Mini brique tonique au gingembre. Ideale pour les collations en deplacement ou dans la boite a lunch des enfants.",
     price: 500,
     category: 'Jus 25cl',
     stock: 80,
@@ -100,7 +100,7 @@ export const mockProducts: Product[] = [
   {
     id: 10,
     name: 'Jus de Mil Fraise 25cl',
-    description: 'La gourmandise du mil alliée à la fraise. Un jus adoré des enfants, naturellement sucré.',
+    description: "La gourmandise du mil alliee a la fraise. Un jus adore des enfants, naturellement sucre sans additifs.",
     price: 550,
     category: 'Jus 25cl',
     stock: 3,
@@ -111,8 +111,8 @@ export const mockProducts: Product[] = [
   // --- Packs ---
   {
     id: 11,
-    name: 'Pack Découverte (6 x 25cl)',
-    description: '6 briques 25cl variées : 2 Nature, 2 Gingembre, 1 Fraise, 1 Menthe. Parfait pour découvrir toute notre gamme.',
+    name: 'Pack Decouverte (6 x 25cl)',
+    description: "6 briques 25cl variees : 2 Nature, 2 Gingembre, 1 Fraise, 1 Menthe. Parfait pour decouvrir toute la gamme Sen Jus.",
     price: 2500,
     category: 'Packs',
     stock: 20,
@@ -122,7 +122,7 @@ export const mockProducts: Product[] = [
   {
     id: 12,
     name: 'Pack Famille (4 x 1L)',
-    description: '4 bouteilles d'1L assorties : 1 Nature, 1 Gingembre, 1 Bissap, 1 Vanille. Economique et généreux.',
+    description: "4 bouteilles d'1L assorties : 1 Nature, 1 Gingembre, 1 Bissap, 1 Vanille. Economique et genereux pour toute la famille.",
     price: 5500,
     category: 'Packs',
     stock: 15,
@@ -140,7 +140,7 @@ export const mockOrders: Order[] = [
     address: 'Cite Keur Gorgui, Dakar',
     items: [
       { product_id: 1, product_name: 'Jus de Mil Nature 1L', quantity: 2, price: 1500 },
-      { product_id: 11, product_name: 'Pack Découverte (6 x 25cl)', quantity: 1, price: 2500 },
+      { product_id: 11, product_name: 'Pack Decouverte (6 x 25cl)', quantity: 1, price: 2500 },
     ],
     total: 5500,
     status: 'en_attente',
@@ -228,7 +228,7 @@ export const mockOrders: Order[] = [
     address: 'Sacre Coeur 3, Villa 12, Dakar',
     items: [
       { product_id: 12, product_name: 'Pack Famille (4 x 1L)', quantity: 2, price: 5500 },
-      { product_id: 11, product_name: 'Pack Découverte (6 x 25cl)', quantity: 1, price: 2500 },
+      { product_id: 11, product_name: 'Pack Decouverte (6 x 25cl)', quantity: 1, price: 2500 },
     ],
     total: 13500,
     status: 'en_attente',
