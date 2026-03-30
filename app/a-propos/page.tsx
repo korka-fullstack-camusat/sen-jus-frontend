@@ -29,7 +29,7 @@ export default function AProposPage() {
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="relative aspect-[4/3] rounded-sm overflow-hidden">
                 <Image
-                  src="/images/hero-bg.jpg"
+                  src="/images/notre-histoire.jpg"
                   alt="SEN Jus - Produits a base de mil"
                   fill
                   className="object-cover"

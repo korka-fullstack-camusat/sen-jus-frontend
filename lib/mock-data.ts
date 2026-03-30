@@ -10,7 +10,7 @@ export const mockProducts: Product[] = [
     price: 2000,
     category: 'Jus 1L',
     stock: 50,
-    images: ['/images/sen-jus-mil.png'],
+    images: ['/images/sen-jus-1l.jpg'],
     created_at: '2024-01-15T10:00:00Z'
   },
   {
@@ -20,7 +20,7 @@ export const mockProducts: Product[] = [
     price: 1000,
     category: 'Jus 50cl',
     stock: 75,
-    images: ['/images/sen-jus-mil.png'],
+    images: ['/images/sen-jus-500ml.jpg'],
     created_at: '2024-01-15T10:00:00Z'
   },
   {
@@ -30,7 +30,7 @@ export const mockProducts: Product[] = [
     price: 300,
     category: 'Jus 25cl',
     stock: 100,
-    images: ['/images/sen-jus-mil.png'],
+    images: ['/images/sen-jus-250ml.jpg'],
     created_at: '2024-01-15T10:00:00Z'
   },
   {
@@ -40,7 +40,7 @@ export const mockProducts: Product[] = [
     price: 4800,
     category: 'Packs',
     stock: 30,
-    images: ['/images/sen-jus-mil.png'],
+    images: ['/images/sen-jus-pack.jpg'],
     created_at: '2024-01-15T10:00:00Z'
   },
   {
@@ -50,7 +50,7 @@ export const mockProducts: Product[] = [
     price: 10000,
     category: 'Packs',
     stock: 20,
-    images: ['/images/sen-jus-mil.png'],
+    images: ['/images/sen-jus-pack.jpg'],
     created_at: '2024-01-15T10:00:00Z'
   },
   {
@@ -60,7 +60,7 @@ export const mockProducts: Product[] = [
     price: 3000,
     category: 'Packs',
     stock: 40,
-    images: ['/images/sen-jus-mil.png'],
+    images: ['/images/sen-jus-pack.jpg'],
     created_at: '2024-01-15T10:00:00Z'
   }
 ]

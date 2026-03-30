@@ -13,7 +13,7 @@ export function Hero() {
         alignItems: "center",
         justifyContent: "center",
         // background-image CSS : impossible de déborder du conteneur
-        backgroundImage: "url('/images/hero-bg.png')",
+        backgroundImage: "url('/images/hero-bg.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
