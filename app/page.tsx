@@ -13,7 +13,7 @@ function StorySection() {
           <div className="hidden sm:block">
             <div className="relative aspect-[4/3] rounded-sm overflow-hidden">
               <Image
-                src="/images/hero-bg.png"
+                src="/images/notre-histoire.jpg"
                 alt="SEN Jus - Produits a base de mil"
                 fill
                 className="object-cover"
