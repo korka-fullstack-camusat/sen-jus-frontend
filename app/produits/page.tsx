@@ -40,9 +40,9 @@ export default function ProductsPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
           {/* Filters */}
-          <div className="flex flex-col gap-4 mb-8">
+          <div className="flex flex-col items-center gap-4 mb-8">
             {/* Search */}
-            <div className="relative max-w-md">
+            <div className="relative w-full max-w-md">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 type="text"
@@ -54,7 +54,7 @@ export default function ProductsPage() {
             </div>
 
             {/* Category Pills */}
-            <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
+            <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide justify-center flex-wrap">
               <Button
                 variant={selectedCategory === null ? "default" : "outline"}
                 size="sm"
